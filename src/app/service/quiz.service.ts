@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IQuizResponse } from '../interface/IQuizResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -9,15 +10,21 @@ export class QuizService {
   #http = inject(HttpClient);
   #url = 'https://opentdb.com/api.php?';
 
-  getEasyQuestions(): Observable<any> {
-    return this.#http.get<any>(`${this.#url}amount=4&difficulty=easy`);
+  getEasyQuestions(): Observable<IQuizResponse> {
+    return this.#http.get<IQuizResponse>(
+      `${this.#url}amount=4&difficulty=easy`
+    );
   }
 
-  getMediumQuestions(): Observable<any> {
-    return this.#http.get<any>(`${this.#url}amount=4&difficulty=medium`);
+  getMediumQuestions(): Observable<IQuizResponse> {
+    return this.#http.get<IQuizResponse>(
+      `${this.#url}amount=4&difficulty=medium`
+    );
   }
 
-  getHardQuestions(): Observable<any> {
-    return this.#http.get<any>(`${this.#url}amount=4&difficulty=hard`);
+  getHardQuestions(): Observable<IQuizResponse> {
+    return this.#http.get<IQuizResponse>(
+      `${this.#url}amount=4&difficulty=hard`
+    );
   }
 }

@@ -1,1 +1,14 @@
-<p>quiz works!</p>
+<h1>QuizMaster v.1.0!</h1>
+
+<div>
+  <div>
+    <p>{{ quizStore.currentQuestion().question.category }}</p>
+    <p>{{ quizStore.currentQuestion().question.question }}</p>
+  </div>
+  <div>
+    @for (answer of quizStore.currentQuestion().shuffledAnswers; track $index)
+    {
+    <p>{{ answer }}</p>
+    }
+  </div>
+</div>
