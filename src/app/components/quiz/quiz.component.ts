@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { QuizStore } from '../../store/quiz.store';
+import { QuizQuestionComponentComponent } from "../quiz-question-component/quiz-question-component.component";
 
 @Component({
   selector: 'app-quiz',
-  imports: [],
+  imports: [QuizQuestionComponentComponent],
   templateUrl: './quiz.component.html',
 })
 export class QuizComponent implements OnInit {

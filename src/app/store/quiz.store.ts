@@ -51,11 +51,18 @@ export const QuizStore = signalStore(
         question = store.questions().hard[index - 8];
       }
 
-      const answers = [...question.incorrect_answers, question.correct_answer];
-      const shuffledAnswers = shuffleArray(answers);
+      if (!question) {
+        return null;
+      }
 
-      return { question, shuffledAnswers };
+      const correctAnswer = question.correct_answer;
+      const options = [...question.incorrect_answers, question.correct_answer];
+      const shuffledOptions = shuffleArray(options);
+
+      return { question, shuffledOptions, correctAnswer };
     }),
+
+    correctAnswers: computed(() => {}),
   })),
   withMethods((store, quizService = inject(QuizService)) => ({
     getEasyQuestions: rxMethod<void>(
@@ -139,6 +146,14 @@ export const QuizStore = signalStore(
         })
       )
     ),
+
+    evaluateAnswer(answer: string) {
+      if (store.currentQuestion()?.correctAnswer === answer) {
+        patchState(store, { playerScore: store.playerScore() + 1 });
+      } else {
+        patchState(store, { isGameOver: true });
+      }
+    },
   }))
 );
 

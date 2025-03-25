@@ -1,14 +1,22 @@
-<h1 class="text-3xl font-bold underline text-center mt-10">
-  QuizMaster v.1.0!
-</h1>
-<div>
-  <div>
-    <p>{{ quizStore.currentQuestion().question.category }}</p>
-    <p>{{ quizStore.currentQuestion().question.question }}</p>
-  </div>
-  <div>
-    @for (answer of quizStore.currentQuestion().shuffledAnswers; track $index) {
-    <p>{{ answer }}</p>
-    }
+<div class="bg-stone-700 h-screen w-screen">
+  <div class="h-full w-full flex flex-col justify-center">
+    <h1 class="text-white text-3xl font-bold underline text-center">
+      QuizMaster v.1.0!
+    </h1>
+    @if (quizStore.isGameOver()) { }
+    <div>
+      <div class="flex flex-col items-center justify-center text-center w-full">
+        <div class="w-full">
+          <app-quiz-question-component
+            [question]="quizStore.currentQuestion()?.question?.question"
+          />
+        </div>
+        <app-quiz-question-component
+          [shortLineRight]="true"
+          (onClick)="quizStore.evaluateAnswer($event)"
+          [options]="quizStore.currentQuestion()?.shuffledOptions"
+        />
+      </div>
+    </div>
   </div>
 </div>
