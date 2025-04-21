@@ -1,9 +1,10 @@
-import { Component, EventEmitter, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, input, output } from '@angular/core';
 import { IQuestion } from '../../interface/IQuestion';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-quiz-question-component',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   templateUrl: './quiz-question-component.component.html',
 })

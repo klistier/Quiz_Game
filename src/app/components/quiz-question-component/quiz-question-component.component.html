@@ -8,27 +8,26 @@
   </span>
   <span class="bg-black border border-white rounded h-px flex flex-1"></span>
 </div>
-}
-<div>
-  <div class="grid grid-cols-2 w-screen">
-    @for (option of options(); track $index) {
+} @else {
+<div class="grid grid-cols-2 w-full">
+  @for (option of options(); track $index) {
 
-    <div class="flex items-center justify-center py-1">
-      <span
-        class="bg-black border border-white rounded h-px"
-        [ngClass]="isEvenIndex($index) ? 'flex flex-1' : 'w-[20px]'"
-      ></span>
-      <span
-        class="flex text-center border border-white p-2 bg-black w-[400px] text-white rounded-lg p-4 hover:cursor-pointer"
-        (click)="onClick.emit(option)"
-      >
-        {{ option }}
-      </span>
-      <span
-        class="bg-black border border-white rounded"
-        [ngClass]="isEvenIndex($index) ? 'w-[20px]' : 'flex flex-1'"
-      ></span>
-    </div>
-    }
+  <div class="flex items-center justify-center py-1 w-full">
+    <span
+      class="bg-black border border-white rounded h-px"
+      [ngClass]="isEvenIndex($index) ? 'flex flex-1' : 'w-[20px]'"
+    ></span>
+    <span
+      class="flex text-center border border-white p-2 bg-black w-[400px] text-white rounded-lg p-4 hover:cursor-pointer hover:bg-amber-600"
+      (click)="onClick.emit(option)"
+    >
+      {{ option }}
+    </span>
+    <span
+      class="bg-black border border-white rounded"
+      [ngClass]="isEvenIndex($index) ? 'w-[20px]' : 'flex flex-1'"
+    ></span>
   </div>
+  }
 </div>
+}

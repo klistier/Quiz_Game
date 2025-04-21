@@ -1,1 +1,36 @@
-<p>quiz-scoreboard-component works!</p>
+<div class="border shadow rounded w-[250px] bg-black text-white">
+  <div class="flex justify-evenly p-2">
+    <img
+      src="/assets/phone-icon.png"
+      alt="Phone icon"
+      class="w-12 h-10 hover:cursor-pointer"
+    />
+    <img
+      src="/assets/50-50-icon.png"
+      alt="50/50 icon"
+      class="w-12 h-10 hover:cursor-pointer"
+      [ngClass]="
+        quizStore.isFiftyFiftyUsed() ? 'opacity-50 pointer-events-none' : ''
+      "
+      (click)="quizStore.fiftyFifty()"
+    />
+    <img
+      src="/assets/replace-icon.png"
+      alt="Replace icon"
+      class="w-12 h-10 hover:cursor-pointer"
+    />
+  </div>
+  @for (level of levels(); track $index) {
+  <div
+    class="p-1 flex justify-between"
+    [ngClass]="
+      quizStore.playerScore() === level - 1
+        ? 'border rounded shadow border-amber-600'
+        : ''
+    "
+  >
+    <span class="px-2">{{ level }}</span>
+    <span class="px-2">{{ quizStore.prizes()[$index] }}</span>
+  </div>
+  }
+</div>

@@ -12,19 +12,19 @@ export class QuizService {
 
   getEasyQuestions(): Observable<IQuizResponse> {
     return this.#http.get<IQuizResponse>(
-      `${this.#url}amount=4&difficulty=easy`
+      `${this.#url}amount=5&difficulty=easy`
     );
   }
 
   getMediumQuestions(): Observable<IQuizResponse> {
     return this.#http.get<IQuizResponse>(
-      `${this.#url}amount=4&difficulty=medium`
+      `${this.#url}amount=5&difficulty=medium`
     );
   }
 
   getHardQuestions(): Observable<IQuizResponse> {
     return this.#http.get<IQuizResponse>(
-      `${this.#url}amount=4&difficulty=hard`
+      `${this.#url}amount=5&difficulty=hard`
     );
   }
 }

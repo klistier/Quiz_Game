@@ -1,22 +1,48 @@
-<div class="bg-stone-700 h-screen w-screen">
+<div class="bg-[url('/assets/Background.jpg')] h-screen w-screen">
   <div class="h-full w-full flex flex-col justify-center">
+    @if (quizStore.isGameOver()) {
+    <div class="flex justify-center items-center flex-col gap-2">
+      <h1 class="text-white text-3xl font-bold">Wrong answer, game over!</h1>
+      <p class="text-white">You won {{ quizStore.currentPrize() }}$</p>
+    </div>
+    } @else if (quizStore.isLoading()) {
     <h1 class="text-white text-3xl font-bold underline text-center">
-      QuizMaster v.1.0!
+      Loading, please wait...
     </h1>
-    @if (quizStore.isGameOver()) { }
-    <div>
+    } @else if (quizStore.isGamePaused()) {
+    <div class="flex justify-center items-center flex-col gap-2">
+      <h1 class="text-white text-3xl font-bold">Correct answer!</h1>
+      <p class="text-white">Current level: {{ quizStore.currentPrize() }}$</p>
+      <div class="flex flex-col justify-center items-center p-2">
+        <p class="text-white text-3xl font-bold">
+          Do you want to advance to the next question?
+        </p>
+        <div class="flex gap-4">
+          <span class="text-white p-2" (click)="quizStore.setCurrentQuestion()"
+            >Yes</span
+          >
+          <span class="text-white p-2" (click)="quizStore.dropOut()">No</span>
+        </div>
+      </div>
+    </div>
+    } @else{
+    <div class="flex flex-1 items-center px-3">
       <div class="flex flex-col items-center justify-center text-center w-full">
         <div class="w-full">
           <app-quiz-question-component
-            [question]="quizStore.currentQuestion()?.question?.question"
+            [question]="quizStore.currentQuestion()?.question"
           />
         </div>
-        <app-quiz-question-component
-          [shortLineRight]="true"
-          (onClick)="quizStore.evaluateAnswer($event)"
-          [options]="quizStore.currentQuestion()?.shuffledOptions"
-        />
+        <div class="w-full">
+          <app-quiz-question-component
+            [shortLineRight]="true"
+            (onClick)="quizStore.evaluateAnswer($event)"
+            [options]="quizStore.currentQuestion()?.shuffledOptions"
+          />
+        </div>
       </div>
+      <app-quiz-scoreboard-component />
     </div>
+    }
   </div>
 </div>
